@@ -1,4 +1,5 @@
 
+//add comment for duplicate 
 var deleteDuplicates = function(head) {
     let cur = head;
     while (cur&& cur.next !=null)

@@ -1,0 +1,26 @@
+var countNodes = function(root) {
+    if (!root) return 0;
+
+    let leftHeight = 0;
+    let rightHeight = 0;
+
+    let left = root;
+    let right = root;
+
+    while (left) {
+        leftHeight++;
+        left = left.left;
+    }
+
+    while (right) {
+        rightHeight++;
+        right = right.right;
+    }
+
+    // Perfect binary tree
+    if (leftHeight === rightHeight) {
+        return (1 << leftHeight) - 1;
+    }
+
+    return 1 + countNodes(root.left) + countNodes(root.right);
+};

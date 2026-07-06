@@ -1,51 +1,24 @@
-var threeSum = function (nums) {
+var threeSum = function(nums) {
 
     nums.sort((a, b) => a - b);
 
-    let result = [];
+    let result = new Set();
 
     for (let i = 0; i < nums.length - 2; i++) {
 
-        // Skip duplicate first elements
-        if (i > 0 && nums[i] === nums[i - 1]) {
-            continue;
-        }
+        let seen = new Set();
 
-        let left = i + 1;
-        let right = nums.length - 1;
+        for (let j = i + 1; j < nums.length; j++) {
 
-        while (left < right) {
+            let target = -(nums[i] + nums[j]);
 
-            let sum = nums[i] + nums[left] + nums[right];
-
-            if (sum === 0) {
-
-                result.push([nums[i], nums[left], nums[right]]);
-
-                // Skip duplicate left values
-                while (left < right && nums[left] === nums[left + 1]) {
-                    left++;
-                }
-
-                // Skip duplicate right values
-                while (left < right && nums[right] === nums[right - 1]) {
-                    right--;
-                }
-
-                left++;
-                right--;
-
-            } else if (sum < 0) {
-
-                left++;
-
-            } else {
-
-                right--;
-
+            if (seen.has(target)) {
+                result.add(`${nums[i]},${target},${nums[j]}`);
             }
+
+            seen.add(nums[j]);
         }
     }
 
-    return result;
+    return [...result].map(item => item.split(",").map(Number));
 };

@@ -8,6 +8,8 @@ var check = function(nums) {
             count++;
         }
 
+        
+
         if (count > 1) {
             return false;
         }
